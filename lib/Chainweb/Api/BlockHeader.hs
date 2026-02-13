@@ -128,6 +128,7 @@ encodeChainwebVersion "recap-development" = putWord32le 0x01
 encodeChainwebVersion "development" = putWord32le 0x02
 encodeChainwebVersion "mainnet01" = putWord32le 0x05
 encodeChainwebVersion "testnet04" = putWord32le 0x07
+encodeChainwebVersion "testnet06" = putWord32le 0x08
 encodeChainwebVersion v = error $ "chainweb version " <> unpack v <> " does not exist"
 {-# INLINE encodeChainwebVersion #-}
 
@@ -196,5 +197,6 @@ decodeChainwebVersion = label "ChainwebVersion" $ getWord32le >>= \case
   0x02 -> return "development"
   0x05 -> return "mainnet01"
   0x07 -> return "testnet04"
+  0x08 -> return "testnet06"
   x -> fail $ "chainweb version " <> show x <> " does not exist"
 {-# INLINE decodeChainwebVersion #-}
